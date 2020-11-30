@@ -1,5 +1,5 @@
-const path  = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
+const path = require('path')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 module.exports = {
   entry: './src/index.js',
@@ -13,7 +13,7 @@ module.exports = {
     port: 9000
   },
   resolve: {
-    extensions: ['.js', '.jsx'],
+    extensions: ['.js', '.jsx']
   },
   module: {
     rules: [
