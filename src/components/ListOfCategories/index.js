@@ -1,9 +1,18 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { Category } from '../Category'
-import { categories } from '../../../api/db.json'
 import { List, Item } from './styles'
 
 export const ListOfCategories = () => {
+  const [categories, setCategories] = useState([])
+
+  useEffect(function () {
+    window.fetch('https://petgram-server-self.vercel.app/categories')
+      .then(res => res.json())
+      .then(response => {
+        setCategories(response)
+      })
+  }, [])
+
   return (
     <List>
       {
