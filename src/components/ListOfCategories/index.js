@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import NProgress from 'nprogress'
 import { Category } from '../Category'
 import { List, Item } from './styles'
 
@@ -7,11 +8,13 @@ function useCategoriesData () {
   const [loading, setLoading] = useState(false)
 
   useEffect(function () {
+    NProgress.start()
     setLoading(true)
     window.fetch('https://petgram-server-self.vercel.app/categories')
       .then(res => res.json())
       .then(response => {
         setCategories(response)
+        NProgress.done()
         setLoading(false)
       })
   }, [])
@@ -39,7 +42,7 @@ export const ListOfCategories = () => {
       {
         loading
           ? <Item key='Loading'><Category /></Item>
-          : categories.map(category => <Item key={category}><Category {...category} /></Item>)
+          : categories.map(category => <Item key={category.id}><Category {...category} /></Item>)
       }
     </List>
   )
