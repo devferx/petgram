@@ -10,7 +10,8 @@ module.exports = {
   devServer: {
     contentBase: path.resolve(__dirname, 'dist'),
     compress: true,
-    port: 9000
+    port: 9000,
+    open: true
   },
   resolve: {
     extensions: ['.js', '.jsx']
