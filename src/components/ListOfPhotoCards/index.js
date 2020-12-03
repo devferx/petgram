@@ -1,17 +1,19 @@
 import React from 'react'
-import { useGetPhotos } from '../../hooks/useGetPhotos'
 import { PhotoCard } from '../PhotoCard'
 import { Spinner } from '../Spinner'
+// import { useGetPhotos } from '../../hooks/useGetPhotos'
+// import { PhotoCard } from '../PhotoCard'
+// import { Spinner } from '../Spinner'
 
-export const ListOfPhotoCards = ({ categoryId }) => {
-  const { loading, data } = useGetPhotos(categoryId)
-
+// export const ListOfPhotoCards = ({ categoryId }) => {
+export const ListOfPhotoCardsComponent = ({ data: { photos = [], loading } } = {}) => {
+  // const { loading, data } = useGetPhotos(categoryId)
   if (loading) return <Spinner />
 
   return (
     <ul>
-      {data.photos.map((photoCard, id) => (
-        <PhotoCard key={id} {...photoCard} />
+      {photos.map((photo) => (
+        <PhotoCard key={photo.id} {...photo} />
       ))}
     </ul>
   )
