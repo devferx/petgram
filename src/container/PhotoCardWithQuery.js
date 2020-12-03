@@ -4,7 +4,7 @@ import { gql } from 'apollo-boost'
 import { Query } from 'react-apollo'
 import { Spinner } from '../components/Spinner'
 
-const query = gql`
+const GET_SINGLE_PHOTO = gql`
   query getSinglePhoto ($id: ID!){
     photo(id: $id){
       id
@@ -17,18 +17,21 @@ const query = gql`
 }
 `
 
+const renderProp = ({ loading, error, data }) => {
+  if (!loading) {
+    const { photo = {} } = data
+    return <PhotoCard {...photo} />
+  }
+
+  if (error) return <p>Error!</p>
+
+  return <Spinner />
+}
+
 export const PhotoCardWithQuery = ({ id }) => {
   return (
-    <Query query={query} variables={{ id }}>
-      {
-        ({ loading, error, data }) => {
-          if (!loading) {
-            const { photo = {} } = data
-            return <PhotoCard {...photo} />
-          }
-          return <Spinner />
-        }
-      }
+    <Query query={GET_SINGLE_PHOTO} variables={{ id }}>
+      {renderProp}
     </Query>
   )
 }
