@@ -5,13 +5,15 @@ module.exports = {
   entry: './src/index.js',
   output: {
     filename: 'app.bundle.js',
-    path: path.resolve(__dirname, 'dist')
+    path: path.resolve(__dirname, 'dist'),
+    publicPath: '/'
   },
   devServer: {
     contentBase: path.resolve(__dirname, 'dist'),
     compress: true,
     port: 9000,
-    open: true
+    open: true,
+    historyApiFallback: true
   },
   resolve: {
     extensions: ['.js', '.jsx']
