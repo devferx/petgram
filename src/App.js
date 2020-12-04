@@ -1,19 +1,19 @@
 import React from 'react'
 import { Router } from '@reach/router'
+
+import Context from './context'
+
 import { Home } from './pages/Home'
 import { Detail } from './pages/Detail'
 import { Favs } from './pages/Favs'
 import { User } from './pages/User'
 import { NotRegisteredUser } from './pages/NotRegisteredUser'
+
 import { Logo } from './components/Logo'
 import { Navbar } from './components/Navbar'
 import { GlobalStyle } from './styles/GlobalStyles'
 
-const UserLogged = ({ children }) => {
-  return children({ isAuth: false })
-}
-
-const App = () => {
+export const App = () => {
   return (
     <div>
       <GlobalStyle />
@@ -25,7 +25,7 @@ const App = () => {
         <Home path='/pet/:id' />
         <Detail path='/detail/:detailId' />
       </Router>
-      <UserLogged>
+      <Context.Consumer>
         {
           ({ isAuth }) =>
             isAuth
@@ -42,10 +42,8 @@ const App = () => {
                 </Router>
                 )
           }
-      </UserLogged>
+      </Context.Consumer>
       <Navbar />
     </div>
   )
 }
-
-export default App
